@@ -5,13 +5,16 @@ import { bindActionCreators } from 'redux';
 
 import * as TodoActions from './store/actions';
 
-const TodoList = ({ todos, addTodo }) => (
-  <ul>
-    { todos.map(todo => (
-      <li key={todo.id}>{todo.text}</li>
-    )) }
-    <button onClick={() => addTodo('Fazer café')}>Novo todo</button>
-  </ul>
+const TodoList = ({ todos, requestTodoList }) => (
+  <div>
+    <ul>
+      { todos.data.map(todo => (
+        <li key={todo.id}>{todo.text}</li>
+      )) }
+    </ul>
+    <button onClick={() => requestTodoList()}>Carregar todos</button>
+    { todos.loading && <p>Carregando...</p> }
+  </div>
 );
 
 const mapStateToProps = state => ({
